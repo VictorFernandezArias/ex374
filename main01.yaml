@@ -1,0 +1,21 @@
+- name: Playbook 01
+  hosts: localhost
+  gather_facts: false
+  # roles:
+  #   - role01
+  # handlers:
+  #   - import_tasks: role01/handlers/main.yml  
+  vars:
+    main_hello: 'Hola Mundo!'
+  tasks:
+    - name: Imprimir variable pre_hello
+      debug: 
+        var: pre_hello | default('Wait for it...')
+      notify: "main hello"
+
+  handlers:
+    - name: Imprimir variable main_hello
+      debug: 
+        var: main_hello
+      listen: "main hello"
+            
